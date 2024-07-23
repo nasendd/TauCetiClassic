@@ -443,7 +443,7 @@
 	for(var/obj/structure/stool/bed/chair/S in src_turf)
 		if(istype(S, /obj/structure/stool/bed/chair/noose))
 			continue
-		if(istype(S, /obj/structure/stool/bed/chair))
+		if(istype(S, /obj/structure/stool))
 			var/obj/structure/stool/bed/chair/C = S
 			if(!C.flipped)
 				return TRUE
