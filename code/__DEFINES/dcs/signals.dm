@@ -125,6 +125,8 @@
 	#define COMPONENT_NO_AFTERATTACK 1
 /// from base of atom/examine(): (/mob)
 #define COMSIG_PARENT_EXAMINE "atom_examine"
+/// from base of atom/examine(): (/mob)
+#define COMSIG_MOB_EXAMINED "mob_examined"
 /// from base of mob/examinate(): (/mob)
 #define COMSIG_PARENT_POST_EXAMINE "atom_post_examine"
 /// from base of mob/examinate(): (/atom)
@@ -276,7 +278,7 @@
 #define COMSIG_CLEAR_MOOD_EVENT "clear_mood"
 
 // mob signals
-/// from base of mob/Login(): ()
+/// from base of mob/LateLogin(): ()
 #define COMSIG_LOGIN "mob_login"
 /// from base of mob/Logout(): (logout_reason)
 #define COMSIG_LOGOUT "mob_logout"

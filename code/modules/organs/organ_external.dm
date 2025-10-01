@@ -98,7 +98,7 @@
 	var/is_husk
 	var/is_burnt
 
-// todo: currently it's impossible to spawn organs out of body 
+// todo: currently it's impossible to spawn organs out of body
 // as insert_organ() call with owner is required for proper init
 /*
 /obj/item/organ/external/atom_init(mapload)
@@ -409,10 +409,10 @@
 /obj/item/organ/external/emp_act(severity)
 	controller.emp_act(severity)
 
-/obj/item/organ/external/take_damage(brute = 0, burn = 0, damage_flags = 0, used_weapon = null)
+/obj/item/organ/external/take_damage(brute = 0, burn = 0, damage_flags = 0, used_weapon = null, impact_direction = null)
 	if(!isnum(burn))
 		return // prevent basic take_damage usage (TODO remove workaround)
-	return controller.take_damage(brute, burn, damage_flags, used_weapon)
+	return controller.take_damage(brute, burn, damage_flags, used_weapon, impact_direction = impact_direction)
 
 /obj/item/organ/external/proc/heal_damage(brute, burn, internal = 0, robo_repair = 0)
 	return controller.heal_damage(brute, burn, internal, robo_repair)
@@ -661,6 +661,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	owner.updatehealth()
 	owner.update_body(body_zone)
+	owner.update_underwear()
 
 	if(!should_delete)
 		forceMove(owner.loc)
@@ -1113,23 +1114,28 @@ Note that amputating the affected organ does in fact remove the infection from t
 	// todo: should move it to own organ, make /eyes external
 	if(species.eyes_static_layer)
 		var/mutable_appearance/eyes_static_layer = mutable_appearance(
-			species.eyes_icon, 
-			species.eyes_static_layer, 
+			species.eyes_icon,
+			species.eyes_static_layer,
 			-EYES_LAYER
 		)
+
+		if(owner && HAS_TRAIT(owner, TRAIT_PLUVIAN_BLESSED))
+			eyes_static_layer.color = "#88ffff"
 
 		. += eyes_static_layer
 
 	if(species.eyes_colorable_layer)
 		var/mutable_appearance/eyes_colorable_layer = mutable_appearance(
-			species.eyes_icon, 
-			species.eyes_colorable_layer, 
+			species.eyes_icon,
+			species.eyes_colorable_layer,
 			-EYES_LAYER
 		)
 
 		eyes_colorable_layer.color = rgb(r_eyes, g_eyes, b_eyes)
 		if(owner)
-			if((HULK in owner.mutations) || (LASEREYES in owner.mutations) || iszombie(owner) || HAS_TRAIT(owner, TRAIT_CULT_EYES)) // todo: red eyes trait
+			if(HAS_TRAIT(owner, TRAIT_PLUVIAN_BLESSED))
+				eyes_colorable_layer.color = "#00ffff"
+			else if((HULK in owner.mutations) || (LASEREYES in owner.mutations) || iszombie(owner) || HAS_TRAIT(owner, TRAIT_CULT_EYES)) // todo: red eyes trait
 				eyes_colorable_layer.color = "#ff0000"
 
 			if(HAS_TRAIT(owner, TRAIT_GLOWING_EYES))
@@ -1435,7 +1441,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/r_leg/diona/podman
 	controller_type = /datum/bodypart_controller/plant
 
-/obj/item/organ/external/head/take_damage(brute, burn, damage_flags, used_weapon)
+/obj/item/organ/external/head/take_damage(brute, burn, damage_flags, used_weapon, impact_direction = null)
 	if(!disfigured)
 		if(brute_dam > 40)
 			if (prob(50))
