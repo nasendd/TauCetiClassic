@@ -288,7 +288,9 @@ ADD_TO_GLOBAL_LIST(/obj/item/mine/replicator, replicator_mines)
 	update_icon()
 
 	user.visible_message("<span class='notice'>[user] starts disarming \a [CASE(src, ACCUSATIVE_CASE)].</span>", "<span class='notice'>You start disarming \a [CASE(src, ACCUSATIVE_CASE)].</span>")
-	var/erase_time = length(global.alive_replicators) > 0 && !is_skill_competent(user, list(/datum/skill/engineering = SKILL_LEVEL_PRO)) ? SKILL_TASK_DIFFICULT : SKILL_TASK_TRIVIAL
+	var/erase_time = !is_skill_competent(user, list(/datum/skill/engineering = SKILL_LEVEL_PRO)) ? SKILL_TASK_DIFFICULT : SKILL_TASK_TRIVIAL
+	if(!length(global.alive_replicators) > 0)
+		erase_time = SKILL_TASK_TRIVIAL
 	if(I.use_tool(src, user, erase_time, volume = 50, quality = QUALITY_PULSING))
 		user.visible_message("<span class='notice'>[user] finishes disarming \a [CASE(src, ACCUSATIVE_CASE)].</span>", "<span class='notice'>You finish disarming \a [CASE(src, ACCUSATIVE_CASE)].</span>")
 
