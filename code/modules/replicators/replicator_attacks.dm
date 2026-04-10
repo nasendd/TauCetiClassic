@@ -167,7 +167,7 @@ ADD_TO_GLOBAL_LIST(/obj/item/mine/replicator, replicator_mines)
 	fake_disintegrating = FALSE
 
 /obj/item/mine/replicator
-	name = "mine"
+	name = ""
 	desc = "A floating barely visible crystal of immense energy. You can imagine it hurts to step onto."
 	icon = 'icons/mob/replicator.dmi'
 	icon_state = "trap"
