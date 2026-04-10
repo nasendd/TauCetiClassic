@@ -168,6 +168,7 @@ ADD_TO_GLOBAL_LIST(/obj/item/mine/replicator, replicator_mines)
 
 /obj/item/mine/replicator
 	name = ""
+	cases = list("mine", "mine", "mine", "mine", "mine", "mine")
 	desc = "A floating barely visible crystal of immense energy. You can imagine it hurts to step onto."
 	icon = 'icons/mob/replicator.dmi'
 	icon_state = "trap"
@@ -209,7 +210,7 @@ ADD_TO_GLOBAL_LIST(/obj/item/mine/replicator, replicator_mines)
 	if(!iscarbon(AM) && !issilicon(AM) && !istype(AM, /obj/mecha))
 		return
 
-	AM.visible_message("<span class='danger'>[AM] steps on a mine!</span>")
+	AM.visible_message("<span class='danger'>[AM] steps on \a [CASE(src, ACCUSATIVE_CASE)]!</span>")
 	trigger_act(AM)
 
 /obj/item/mine/replicator/proc/do_audiovisual_effects(atom/movable/AM)
@@ -219,7 +220,7 @@ ADD_TO_GLOBAL_LIST(/obj/item/mine/replicator, replicator_mines)
 
 	flick_overlay_view(I, AM, 12)
 
-	audible_message("<b>Mine</b> <i>buzzes.</i>", "You see a light flicker.", hearing_distance = 7, ignored_mobs = observer_list)
+	audible_message("<b>[C_CASE(src, NOMINATIVE_CASE)]</b> <i>buzzes.</i>", "You see a light flicker.", hearing_distance = 7, ignored_mobs = observer_list)
 
 /obj/item/mine/replicator/trigger_act(atom/movable/AM)
 	if(!armed)
@@ -286,10 +287,10 @@ ADD_TO_GLOBAL_LIST(/obj/item/mine/replicator, replicator_mines)
 	being_disarmed = TRUE
 	update_icon()
 
-	user.visible_message("<span class='notice'>[user] starts disarming a mine.</span>", "<span class='notice'>You start disarming a mine.</span>")
+	user.visible_message("<span class='notice'>[user] starts disarming \a [CASE(src, ACCUSATIVE_CASE)].</span>", "<span class='notice'>You start disarming \a [CASE(src, ACCUSATIVE_CASE)].</span>")
 	var/erase_time = length(global.alive_replicators) > 0 && !is_skill_competent(user, list(/datum/skill/engineering = SKILL_LEVEL_PRO)) ? SKILL_TASK_DIFFICULT : SKILL_TASK_TRIVIAL
 	if(I.use_tool(src, user, erase_time, volume = 50, quality = QUALITY_PULSING))
-		user.visible_message("<span class='notice'>[user] finishes disarming a mine.</span>", "<span class='notice'>You finish disarming a mine.</span>")
+		user.visible_message("<span class='notice'>[user] finishes disarming \a [CASE(src, ACCUSATIVE_CASE)].</span>", "<span class='notice'>You finish disarming \a [CASE(src, ACCUSATIVE_CASE)].</span>")
 
 		disarm()
 		return
