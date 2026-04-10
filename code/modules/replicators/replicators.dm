@@ -762,4 +762,4 @@ ADD_TO_GLOBAL_LIST(/mob/living/simple_animal/hostile/replicator, alive_replicato
 
 /obj/item/weapon/reagent_containers/food/snacks/bluespacewaffle/attack(mob/living/M, mob/user, def_zone, silent)
 	. = ..()
-	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(do_teleport), M, get_turf(M), 4, 1, null, null, 'sound/mecha/UI_SCI-FI_Tone_Deep_Wet_15_error.ogg'), 5)
+	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(do_teleport), M, get_turf(M), 4, 1, null, null, 'sound/mecha/UI_SCI-FI_Tone_Deep_Wet_15_error.ogg'), 0.5 SECONDS)
