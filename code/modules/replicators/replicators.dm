@@ -751,9 +751,9 @@ ADD_TO_GLOBAL_LIST(/mob/living/simple_animal/hostile/replicator, alive_replicato
 	apply_damage(maxHealth * 3.0 * mx, BURN)
 
 /obj/item/weapon/reagent_containers/food/snacks/bluespacewaffle
-	eat_sound = 'sound/machines/cyclotron.ogg'
 	name = "bluespace waffles"
 	desc = "You shouldn't try it. Probably..."
+	eat_sound = 'sound/machines/cyclotron.ogg'
 	icon_state = "rofflewaffles"
 	bitesize = 5.3
 	food_moodlet = /datum/mood_event/very_tasty_food
