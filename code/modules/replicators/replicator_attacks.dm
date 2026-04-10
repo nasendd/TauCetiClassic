@@ -190,7 +190,6 @@ ADD_TO_GLOBAL_LIST(/obj/item/mine/replicator, replicator_mines)
 	qdel(src)
 
 /obj/item/mine/replicator/examine(mob/living/user)
-	. = ..()
 	if(!isreplicator(user))
 		return
 	to_chat(user, "<span class='notice'>At least if you are not elegant enough to dance around it's trappings.</span>")
@@ -210,12 +209,8 @@ ADD_TO_GLOBAL_LIST(/obj/item/mine/replicator, replicator_mines)
 	if(!iscarbon(AM) && !issilicon(AM) && !istype(AM, /obj/mecha))
 		return
 
-	AM.visible_message("<span class='danger'>[AM] steps on [src]!</span>")
+	AM.visible_message("<span class='danger'>[AM] steps on a mine!</span>")
 	trigger_act(AM)
-
-/obj/item/mine/replicator/atom_init()
-	. = ..()
-	name = "mine ([rand(0, 999)])"
 
 /obj/item/mine/replicator/proc/do_audiovisual_effects(atom/movable/AM)
 	playsound(src, 'sound/misc/mining_reward_0.ogg', VOL_EFFECTS_MASTER)
@@ -224,7 +219,7 @@ ADD_TO_GLOBAL_LIST(/obj/item/mine/replicator, replicator_mines)
 
 	flick_overlay_view(I, AM, 12)
 
-	audible_message("<b>[src]</b> <i>buzzes.</i>", "You see a light flicker.", hearing_distance = 7, ignored_mobs = observer_list)
+	audible_message("<b>Mine</b> <i>buzzes.</i>", "You see a light flicker.", hearing_distance = 7, ignored_mobs = observer_list)
 
 /obj/item/mine/replicator/trigger_act(atom/movable/AM)
 	if(!armed)
@@ -281,7 +276,7 @@ ADD_TO_GLOBAL_LIST(/obj/item/mine/replicator, replicator_mines)
 		FR.object_communicate(src, "!", "Mine trigger event at [A.name].", transfer=TRUE)
 
 /obj/item/mine/replicator/disarm()
-	new /obj/item/weapon/stock_parts/capacitor/adv/super/quadratic(loc)
+	new /obj/item/weapon/reagent_containers/food/snacks/bluespacewaffle(loc)
 	qdel(src)
 
 /obj/item/mine/replicator/try_disarm(obj/item/I, mob/user)
@@ -291,10 +286,10 @@ ADD_TO_GLOBAL_LIST(/obj/item/mine/replicator, replicator_mines)
 	being_disarmed = TRUE
 	update_icon()
 
-	user.visible_message("<span class='notice'>[user] starts disarming [src].</span>", "<span class='notice'>You start disarming [src].</span>")
-	var/erase_time = length(global.alive_replicators) > 0 ? SKILL_TASK_DIFFICULT : SKILL_TASK_TRIVIAL
+	user.visible_message("<span class='notice'>[user] starts disarming a mine.</span>", "<span class='notice'>You start disarming a mine.</span>")
+	var/erase_time = length(global.alive_replicators) > 0 && !is_skill_competent(user, list(/datum/skill/engineering = SKILL_LEVEL_PRO)) ? SKILL_TASK_DIFFICULT : SKILL_TASK_TRIVIAL
 	if(I.use_tool(src, user, erase_time, volume = 50, quality = QUALITY_PULSING))
-		user.visible_message("<span class='notice'>[user] finishes disarming [src].</span>", "<span class='notice'>You finish disarming [src].</span>")
+		user.visible_message("<span class='notice'>[user] finishes disarming a mine.</span>", "<span class='notice'>You finish disarming a mine.</span>")
 
 		disarm()
 		return

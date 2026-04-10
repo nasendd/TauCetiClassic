@@ -749,3 +749,18 @@ ADD_TO_GLOBAL_LIST(/mob/living/simple_animal/hostile/replicator, alive_replicato
 /mob/living/simple_animal/hostile/replicator/FireBurn(firelevel, last_temperature, air_multiplier)
 	var/mx = 50.0 * firelevel / vsc.fire_firelevel_multiplier * air_multiplier
 	apply_damage(maxHealth * 3.0 * mx, BURN)
+
+/obj/item/weapon/reagent_containers/food/snacks/bluespacewaffle
+	eat_sound = 'sound/machines/cyclotron.ogg'
+	name = "bluespace waffles"
+	desc = "You shouldn't try it. Probably..."
+	icon_state = "rofflewaffles"
+	bitesize = 5.3
+	food_moodlet = /datum/mood_event/very_tasty_food
+	food_type = VERY_TASTY_FOOD
+	list_reagents = list("space_drugs" = 5, "nutriment" = 20, "prismaline" = 1.5)
+
+/obj/item/weapon/reagent_containers/food/snacks/bluespacewaffle/attack(mob/living/M, mob/user, def_zone, silent)
+	. = ..()
+	sleep(5)
+	do_teleport(M, get_turf(M), 4, asoundin = 'sound/mecha/UI_SCI-FI_Tone_Deep_Wet_15_error.ogg')
