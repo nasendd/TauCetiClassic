@@ -23,7 +23,6 @@ var/global/list/announcement_sounds = list(
 	"announce" = 'sound/AI/announce.ogg',
 	"aiannounce" = 'sound/AI/aiannounce.ogg',
 	"portal" = 'sound/AI/portal.ogg',
-	"narsie" = 'sound/antag/bloodcult_scribe.ogg',
 
 	"yesert" = 'sound/AI/yesert.ogg',
 	"noert" = 'sound/AI/noert.ogg',
