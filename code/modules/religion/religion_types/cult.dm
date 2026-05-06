@@ -291,7 +291,7 @@
 	return TRUE
 
 /datum/religion/cult/proc/first_rise()
-	for(var/mob/M in player_list)
+	for(var/mob/M as anything in player_list)
 		if(!isnewplayer(M))
 			M.playsound_local(null, 'sound/antag/bloodcult_eyes.ogg', VOL_EFFECTS_VOICE_ANNOUNCEMENT, vary = FALSE, frequency = null, ignore_environment = TRUE)
 	for(var/mob/living/L in members)
@@ -301,7 +301,7 @@
 	log_game("The blood cult has risen with [length(members)] players.")
 
 /datum/religion/cult/proc/first_ascend()
-	for(var/mob/M in player_list)
+	for(var/mob/M as anything in player_list)
 		if(!isnewplayer(M))
 			M.playsound_local(null, 'sound/antag/bloodcult_halos.ogg', VOL_EFFECTS_VOICE_ANNOUNCEMENT, vary = FALSE, frequency = null, ignore_environment = TRUE)
 	for(var/mob/living/L in members)

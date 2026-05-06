@@ -96,7 +96,7 @@
 
 /datum/religion_rites/pedestals/cult/narsie/proc/summon(turf/T)
 	new /obj/singularity/narsie(T, religion)
-	for(var/mob/M in player_list)
+	for(var/mob/M as anything in player_list)
 		if(!isnewplayer(M))
 			M.playsound_local(null, 'sound/antag/bloodcult_scribe.ogg', VOL_EFFECTS_VOICE_ANNOUNCEMENT, vary = FALSE, frequency = null, ignore_environment = TRUE)
 	global.cult_religion.eminence.start_process()
