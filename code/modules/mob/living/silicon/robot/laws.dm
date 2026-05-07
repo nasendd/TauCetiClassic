@@ -38,6 +38,7 @@
 	var/datum/ai_laws/master = connected_ai ? connected_ai.laws : null
 	var/temp
 	if (master)
+		src.evil = master.evil
 		laws.ion.len = master.ion.len
 		for (var/index = 1, index <= master.ion.len, index++)
 			temp = master.ion[index]
