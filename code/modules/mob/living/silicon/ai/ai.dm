@@ -950,4 +950,4 @@ var/global/list/ai_verbs_default = list(
 		pixel_y = 0
 
 /mob/living/silicon/ai/is_antag()
-	return laws?.zeroth
+	return laws?.zeroth || evil

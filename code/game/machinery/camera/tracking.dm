@@ -1,4 +1,5 @@
 /mob/living/silicon/ai
+	var/evil = 0
 	var/max_locations = 5
 	var/list/stored_locations = list()
 
