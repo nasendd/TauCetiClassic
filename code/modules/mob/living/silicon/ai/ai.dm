@@ -39,6 +39,7 @@ var/global/list/ai_verbs_default = list(
 	status_flags = CANSTUN|CANPARALYSE
 	shouldnt_see = list(/obj/effect/rune, /obj/item/mine/replicator)
 	w_class = SIZE_HUMAN
+	var/evil = 0
 	var/list/network = list("SS13")
 	var/obj/machinery/camera/camera = null
 	var/list/connected_robots = list()
